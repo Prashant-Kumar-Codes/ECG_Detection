@@ -10,12 +10,11 @@
 
 ### Current Project Status
 - Phase 0 (Dataset Understanding): ✅ Complete
-- Phase 1 (Environment Setup): ⬜ Pending — need to install wfdb, tensorflow
-- Phase 2 (Data Loading): ⬜ Pending
+- Phase 1 (Environment Setup): ⬜ Completed — need to install wfdb, pytorch
+- Phase 2 (Data Loading): ⬜ Completed
 - Phase 3–7: ⬜ Pending
 
 ### Next Steps
-1. Install required libraries (`pip install wfdb tensorflow scikit-learn matplotlib`)
-2. Create a Jupyter notebook or Python script for data exploration
-3. Load a sample ECG record and visualize it
-4. Load full dataset and create train/val/test splits
+1. Proper understanding of the dataset
+2. visualization of the dataset
+3. Load full dataset and create train/val/test splits
