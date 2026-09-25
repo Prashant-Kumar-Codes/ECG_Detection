@@ -1,8 +1,20 @@
 # Last Work — ECG Detection Project
 
-## Date: 2026-08-13
+## Date: 2026-09-25
 
 ### What Was Done
+- ✅ Designed & developed complete prototype website in `ECG_WEBSITE/`
+- ✅ Overhauled frontend with fixed cohesive production palette: Deep Navy (`#0f172a`) + Clinical Cobalt Blue (`#1d4ed8`/`#2563eb`) + crisp white & slate
+- ✅ Substantially expanded Homepage into a production-grade enterprise cardiology platform:
+  - Interactive multi-lead hero rhythm sweep (`Lead I`, `Lead II`, `V1`, `V5`)
+  - Scale & trust metrics (21,801 records, 12 leads, <42ms edge latency, 5 superclasses)
+  - Attractive 5-card diagnostic superclass showcase (removed raw data panel table)
+  - Core platform capabilities grid (Patient Registry SPA, 12-Lead Diagnostic Studio, Microcontroller Telemetry)
+  - 5-stage clinical dataflow pipeline (Acquisition → Buffering → Filtering → Inference → Triage)
+  - Zero-leakage stratified cross-validation methodology overview (Folds 1-8 Train, 9 Val, 10 Test)
+  - Interactive clinical FAQ accordion
+  - High-impact closing enterprise CTA banner
+- ✅ Created `frontend/SETUP_GUIDE.md` and updated `.gitignore` for multi-device deployment
 - ✅ Created comprehensive `Project_Guide/Dataset_Guide.md` (beginner-friendly, 8 sections with sample code)
 - ✅ Fixed notebook path issues in `1_understand_dataset.ipynb`
 - ✅ Loaded master metadata (`ptbxl_database.csv` → `ptbxl_df`, 21801 rows × 43 cols)
