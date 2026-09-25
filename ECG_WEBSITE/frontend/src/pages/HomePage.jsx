@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { DIAGNOSTIC_CLASSES, generate12LeadECG } from '../data/mockPatients';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+};
 
 export default function HomePage({ onNavigate }) {
   const [activeLead, setActiveLead] = useState('II');
@@ -97,8 +108,13 @@ export default function HomePage({ onNavigate }) {
       {/* ======================================================== */}
       {/* SECTION 1: PRODUCTION HERO WITH LIVE WAVEFORM VIEWPORT   */}
       {/* ======================================================== */}
-      <section style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '3rem', alignItems: 'center' }}>
-        <div>
+      <motion.section 
+        initial="hidden" 
+        animate="visible" 
+        variants={staggerContainer}
+        style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '3rem', alignItems: 'center' }}
+      >
+        <motion.div variants={fadeUp}>
           <div className="enterprise-pill" style={{ marginBottom: '1.25rem' }}>
             <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--brand-primary)' }} />
             ENTERPRISE CARDIOLOGY INTELLIGENCE • PTB-XL v1.0.2
@@ -147,10 +163,10 @@ export default function HomePage({ onNavigate }) {
               <span>Hardware Telemetry Ready</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right side: Live Multi-Lead Interactive Monitor */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <motion.div variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span className="tech-label">REAL-TIME SIGNAL ACQUISITION</span>
             <div style={{ display: 'flex', gap: '0.25rem' }}>
@@ -193,14 +209,20 @@ export default function HomePage({ onNavigate }) {
             <span>Time domain: 0.0s – 4.0s Continuous</span>
             <span style={{ color: 'var(--status-normal)' }}>● NORMAL SINUS (72 BPM)</span>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 2: PRODUCTION TRUST & SCALE METRICS              */}
       {/* ======================================================== */}
-      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem' }}>
-        <div className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--brand-primary)' }}>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem' }}
+      >
+        <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--brand-primary)' }}>
           <div className="tech-label">CLINICAL RECORDS</div>
           <div className="mono-metric" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--brand-navy)', margin: '0.25rem 0' }}>
             21,801
@@ -208,9 +230,9 @@ export default function HomePage({ onNavigate }) {
           <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
             Curated 10-second recordings from 18,869 clinical patients.
           </div>
-        </div>
+        </motion.div>
 
-        <div className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--brand-primary)' }}>
+        <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--brand-primary)' }}>
           <div className="tech-label">CHANNEL ARCHITECTURE</div>
           <div className="mono-metric" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--brand-navy)', margin: '0.25rem 0' }}>
             12 Leads
@@ -218,9 +240,9 @@ export default function HomePage({ onNavigate }) {
           <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
             Simultaneous limb & precordial leads (I, II, III, aVR, aVL, aVF, V1-V6).
           </div>
-        </div>
+        </motion.div>
 
-        <div className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--status-normal)' }}>
+        <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--status-normal)' }}>
           <div className="tech-label" style={{ color: 'var(--status-normal)' }}>EDGE LATENCY</div>
           <div className="mono-metric" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--status-normal)', margin: '0.25rem 0' }}>
             &lt; 42 ms
@@ -228,9 +250,9 @@ export default function HomePage({ onNavigate }) {
           <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
             Sub-second triage response optimized for emergency care units.
           </div>
-        </div>
+        </motion.div>
 
-        <div className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--brand-cyan)' }}>
+        <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ borderLeft: '3px solid var(--brand-cyan)' }}>
           <div className="tech-label" style={{ color: 'var(--brand-cyan)' }}>CLASSIFICATION TARGETS</div>
           <div className="mono-metric" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--brand-navy)', margin: '0.25rem 0' }}>
             5 Classes
@@ -238,14 +260,20 @@ export default function HomePage({ onNavigate }) {
           <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
             NORM, MI, STTC, CD, and HYP mapped from 71 SCP-ECG statements.
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 3: THE 5 CARDIAC DIAGNOSTIC SUPERCLASSES         */}
       {/* ======================================================== */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <div>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+      >
+        <motion.div variants={fadeUp}>
           <span className="tech-label">DIAGNOSTIC SCOPE</span>
           <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: 'var(--brand-navy)', letterSpacing: '-0.02em', marginTop: '0.375rem' }}>
             Five Major Clinical Diagnostic Superclasses
@@ -253,7 +281,7 @@ export default function HomePage({ onNavigate }) {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', maxWidth: '720px', marginTop: '0.5rem' }}>
             CardioSense employs a multi-label convolutional architecture that identifies co-existing cardiac pathologies simultaneously rather than forcing a mutually exclusive diagnosis.
           </p>
-        </div>
+        </motion.div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
           {DIAGNOSTIC_CLASSES.map((item) => {
@@ -263,7 +291,8 @@ export default function HomePage({ onNavigate }) {
             const tagClass = isCritical ? 'clinical-badge-critical' : isNorm ? 'clinical-badge-normal' : 'clinical-badge-warning';
 
             return (
-              <div
+              <motion.div
+                variants={fadeUp}
                 key={item.code}
                 className="prod-card"
                 style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', borderColor }}
@@ -291,25 +320,31 @@ export default function HomePage({ onNavigate }) {
                     {item.code === 'NORM' ? '44.0%' : item.code === 'MI' ? '25.2%' : item.code === 'STTC' ? '24.1%' : item.code === 'CD' ? '22.8%' : '12.4%'}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
-      </section>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 4: PLATFORM CORE CAPABILITIES                    */}
       {/* ======================================================== */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <div>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+      >
+        <motion.div variants={fadeUp}>
           <span className="tech-label">CORE PLATFORM ARCHITECTURE</span>
           <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: 'var(--brand-navy)', letterSpacing: '-0.02em', marginTop: '0.375rem' }}>
             Built for Clinical Workstations and Remote Telemetry
           </h2>
-        </div>
+        </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-          <div className="prod-card prod-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="grid-3-col">
+          <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-sm)', background: 'var(--brand-primary-light)', color: 'var(--brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             </div>
@@ -326,9 +361,9 @@ export default function HomePage({ onNavigate }) {
                 Open Registry →
               </button>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="prod-card prod-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-sm)', background: '#ecfdf5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
@@ -345,9 +380,9 @@ export default function HomePage({ onNavigate }) {
                 View Diagnostic Suite →
               </button>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="prod-card prod-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-sm)', background: '#fffbeb', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
@@ -364,15 +399,21 @@ export default function HomePage({ onNavigate }) {
                 Open Live Telemetry →
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 5: CLINICAL PIPELINE & HARDWARE FLOW             */}
       {/* ======================================================== */}
-      <section style={{ background: '#ffffff', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-md)', padding: '2.5rem', boxShadow: 'var(--shadow-subtle)' }}>
-        <div style={{ marginBottom: '2rem', textAlign: 'center', maxWidth: '640px', margin: '0 auto 2.5rem auto' }}>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        style={{ background: '#ffffff', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-md)', padding: '2.5rem', boxShadow: 'var(--shadow-subtle)' }}
+      >
+        <motion.div variants={fadeUp} style={{ marginBottom: '2rem', textAlign: 'center', maxWidth: '640px', margin: '0 auto 2.5rem auto' }}>
           <span className="tech-label">DATA INTEGRITY PIPELINE</span>
           <h2 style={{ fontSize: '1.75rem', fontWeight: '700', color: 'var(--brand-navy)', letterSpacing: '-0.02em', marginTop: '0.375rem' }}>
             From Sensor Electrode to Clinical Decision
@@ -380,56 +421,62 @@ export default function HomePage({ onNavigate }) {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', marginTop: '0.5rem' }}>
             How analog cardiac voltages are acquired, cleaned, and evaluated through deep neural network heads.
           </p>
-        </div>
+        </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', position: 'relative' }}>
-          <div style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
+        <div className="grid-5-col">
+          <motion.div variants={fadeUp} style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
             <div className="mono-metric" style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: '700' }}>01 / ACQUISITION</div>
             <div style={{ fontWeight: '600', fontSize: '0.9375rem', margin: '0.375rem 0' }}>12 Leads / Sensor</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Raw differential voltages captured at 100/500 Hz via limb and precordial chest electrodes.
             </div>
-          </div>
+          </motion.div>
 
-          <div style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
+          <motion.div variants={fadeUp} style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
             <div className="mono-metric" style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: '700' }}>02 / BUFFERING</div>
             <div style={{ fontWeight: '600', fontSize: '0.9375rem', margin: '0.375rem 0' }}>Sliding Buffer</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Rolling 4.5–10.0s time window stores incoming samples with zero sample-drop telemetry.
             </div>
-          </div>
+          </motion.div>
 
-          <div style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
+          <motion.div variants={fadeUp} style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
             <div className="mono-metric" style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: '700' }}>03 / FILTERING</div>
             <div style={{ fontWeight: '600', fontSize: '0.9375rem', margin: '0.375rem 0' }}>Baseline Filter</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               High-pass baseline wander removal and channel-wise z-score normalization.
             </div>
-          </div>
+          </motion.div>
 
-          <div style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
+          <motion.div variants={fadeUp} style={{ padding: '1rem', background: 'var(--bg-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-sm)' }}>
             <div className="mono-metric" style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: '700' }}>04 / INFERENCE</div>
             <div style={{ fontWeight: '600', fontSize: '0.9375rem', margin: '0.375rem 0' }}>1D ConvNet Model</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Extracts spatial-temporal features across all 12 channels into multi-label sigmoid outputs.
             </div>
-          </div>
+          </motion.div>
 
-          <div style={{ padding: '1rem', background: 'var(--brand-primary-light)', border: '1px solid var(--brand-primary-border)', borderRadius: 'var(--radius-sm)' }}>
+          <motion.div variants={fadeUp} style={{ padding: '1rem', background: 'var(--brand-primary-light)', border: '1px solid var(--brand-primary-border)', borderRadius: 'var(--radius-sm)' }}>
             <div className="mono-metric" style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: '700' }}>05 / TRIAGE</div>
             <div style={{ fontWeight: '600', fontSize: '0.9375rem', color: 'var(--brand-navy)', margin: '0.375rem 0' }}>Clinical Alert</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Instantaneous risk flag and confidence matrix for attending cardiology personnel.
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 6: CLINICAL VALIDATION & PROTOCOL RIGOR          */}
       {/* ======================================================== */}
-      <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem', alignItems: 'center' }}>
-        <div>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem', alignItems: 'center' }}
+      >
+        <motion.div variants={fadeUp}>
           <span className="tech-label">SCIENTIFIC INTEGRITY</span>
           <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: 'var(--brand-navy)', letterSpacing: '-0.02em', marginTop: '0.375rem' }}>
             Zero-Leakage Stratified Cross-Validation
@@ -440,9 +487,9 @@ export default function HomePage({ onNavigate }) {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: 1.65, marginTop: '0.5rem' }}>
             CardioSense enforces the official PTB-XL pre-defined <code>strat_fold</code> partitioning: Folds 1–8 strictly reserved for model training (~17,400 records), Fold 9 for hyperparameter validation (~2,200 records), and Fold 10 as an untouched benchmark test set (~2,200 records).
           </p>
-        </div>
+        </motion.div>
 
-        <div className="prod-card prod-card-body" style={{ background: 'var(--bg-canvas)' }}>
+        <motion.div variants={fadeUp} className="prod-card prod-card-body" style={{ background: 'var(--bg-canvas)' }}>
           <div className="tech-label" style={{ marginBottom: '1rem' }}>BENCHMARK PARTITIONING (PTB-XL v1.0.2)</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
             <div>
@@ -478,21 +525,27 @@ export default function HomePage({ onNavigate }) {
           <div style={{ marginTop: '1.25rem', fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
             *Folds 9 & 10 contain high-confidence human cardiologist validated SCP labels for gold-standard clinical evaluation.
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 7: CLINICAL & ENGINEERING FAQ                    */}
       {/* ======================================================== */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <div>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+      >
+        <motion.div variants={fadeUp}>
           <span className="tech-label">CLINICAL QUESTIONS & ANSWERS</span>
           <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: 'var(--brand-navy)', letterSpacing: '-0.02em', marginTop: '0.375rem' }}>
             Frequently Asked Clinical & Technical Questions
           </h2>
-        </div>
+        </motion.div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <motion.div variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {[
             {
               q: 'Why use multi-label classification instead of multiclass classification?',
@@ -532,13 +585,19 @@ export default function HomePage({ onNavigate }) {
               )}
             </div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* ======================================================== */}
       {/* SECTION 8: ENTERPRISE CALL TO ACTION BANNER              */}
       {/* ======================================================== */}
-      <section style={{ background: 'var(--brand-navy)', borderRadius: 'var(--radius-md)', padding: '3.5rem 2.5rem', color: '#ffffff', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxShadow: 'var(--shadow-card)' }}>
+      <motion.section 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeUp}
+        style={{ background: 'var(--brand-navy)', borderRadius: 'var(--radius-md)', padding: '3.5rem 2.5rem', color: '#ffffff', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxShadow: 'var(--shadow-card)' }}
+      >
         <span className="enterprise-pill" style={{ background: 'rgba(255, 255, 255, 0.12)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.25)', marginBottom: '1.25rem' }}>
           READY FOR CLINICAL TRIAL & HARDWARE INTEGRATION
         </span>
@@ -570,7 +629,7 @@ export default function HomePage({ onNavigate }) {
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </button>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

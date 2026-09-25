@@ -29,7 +29,7 @@ export default function Navbar({ activePage, setActivePage, backendConnected }) 
             onClick={() => setActivePage('home')}
           >
             <span className="tech-label" style={{ fontSize: '0.625rem', color: activePage === 'home' ? 'var(--accent-navy)' : 'inherit' }}>01</span>
-            <span>System Overview</span>
+            <span>Overview</span>
           </button>
 
           <button
@@ -37,7 +37,7 @@ export default function Navbar({ activePage, setActivePage, backendConnected }) 
             onClick={() => setActivePage('dashboard')}
           >
             <span className="tech-label" style={{ fontSize: '0.625rem', color: activePage === 'dashboard' ? 'var(--accent-navy)' : 'inherit' }}>02</span>
-            <span>Patient Registry & Detect</span>
+            <span>Patients & Detect</span>
           </button>
 
           <button
@@ -45,7 +45,7 @@ export default function Navbar({ activePage, setActivePage, backendConnected }) 
             onClick={() => setActivePage('realtime')}
           >
             <span className="tech-label" style={{ fontSize: '0.625rem', color: activePage === 'realtime' ? 'var(--accent-navy)' : 'inherit' }}>03</span>
-            <span>Real-Time Stream</span>
+            <span>Live Stream</span>
           </button>
 
           {/* Telemetry Status Indicator */}
